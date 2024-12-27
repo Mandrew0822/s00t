@@ -33,5 +33,10 @@ fi
 # Clean up object file
 rm soot.o
 
-echo "Compilation successful. Parser executable created."
+echo "[ OK ] Compilation successful."
+echo "[ OK ] Applying 'chmod +x' to output file"
 chmod +x soot
+
+echo "[ OK ] Moving executable"
+sudo mv soot /usr/local/bin
+echo "[ OK ] Done."

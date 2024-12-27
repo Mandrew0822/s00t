@@ -1,0 +1,2 @@
+Process will hang because there is no END declaration
+START
