@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Check if nasm is installed
+if ! command -v nasm &> /dev/null; then
+    echo "NASM assembler is not installed. Please install it first."
+    exit 1
+fi
+
+# Check if input file exists
+if [ ! -f "soot.S" ]; then
+    echo "soot.S not found"
+    exit 1
+fi
+
+# Compile the assembly code
+nasm -f elf64 soot.S -o soot.o
+
+# Check if compilation was successful
+if [ $? -ne 0 ]; then
+    echo "Compilation failed"
+    exit 1
+fi
+
+# Link the object file
+ld soot.o -o soot
+
+# Check if linking was successful
+if [ $? -ne 0 ]; then
+    echo "Linking failed"
+    exit 1
+fi
+
+# Clean up object file
+rm soot.o
+
+echo "Compilation successful. Parser executable created."
+chmod +x soot
